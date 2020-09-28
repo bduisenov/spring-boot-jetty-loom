@@ -62,4 +62,4 @@ tasks.withType(JavaExec) {
 }
 
 compileJava.options.fork = true
-compileJava.options.forkOptions.executable = '/Users/hahn/Downloads/jdk-16/bin/git init'
+compileJava.options.forkOptions.executable = '/Users/hahn/Downloads/jdk-16/bin/'
