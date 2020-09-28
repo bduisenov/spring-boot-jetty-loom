@@ -25,7 +25,7 @@ public class DemoApplication {
     }
 
     private ThreadPool getLoomThreadPool() {
-        final var executorService = Executors.newVirtualThreadExecutor();
+        final var executorService = Executors.newThreadExecutor(Thread.builder().name("vt-", 0).virtual().factory());
         return new ThreadPool() {
             @Override
             public void join() throws InterruptedException {
@@ -54,17 +54,12 @@ public class DemoApplication {
         };
     }
 
-    @Bean
-    public Object myEndpoint() {
-        @RestController
-        class MyEndpoint {
-            @GetMapping(path = "/", produces = "application/json")
-            public String hi() {
-                return "Hello World";
-            }
+    @RestController
+    static class MyEndpoint {
+        @GetMapping(path = "/", produces = "application/json")
+        public String hi() {
+            return "Hello World";
         }
-
-        return new MyEndpoint();
     }
 
     public static void main(String[] args) {
